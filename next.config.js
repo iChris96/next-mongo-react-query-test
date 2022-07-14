@@ -2,6 +2,9 @@
 const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
+  env: {
+    mongodburl: "mongodb://localhost/todos",
+}
 }
 
 module.exports = nextConfig
