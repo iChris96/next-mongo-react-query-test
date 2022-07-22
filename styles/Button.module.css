@@ -1,0 +1,16 @@
+.button {
+    all: unset;
+    cursor: pointer;
+    border-radius: 0.2rem;
+    padding: 0.2rem;
+    font-size: 0.8rem;
+    font-weight: 600
+}
+
+.button:focus {
+    outline: 1px solid #fff;
+}
+
+.button:hover {
+    filter: brightness(85%);
+}

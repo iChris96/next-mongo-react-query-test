@@ -1,89 +1,12 @@
 import Head from 'next/head'
 import { useEffect, useRef, useState } from 'react'
 import styles from '../styles/Home.module.css'
-
-const COLORS = {
-  DONE: '#70e170',
-  TODO: '#ebc6ba'
-}
-
-const Button = (props) => {
-  if (props.href) {
-    return <a {...props} />
-  }
-
-  return <button className={styles.button} type="button" {...props} />
-}
-
-const Todo = (props) => {
-  const [todo, setTodo] = useState(props.todo)
-
-  const handleToggleTodo =  async () => {
-    console.log({todo})
-    const response = await fetch('/api/todos', {
-      method: 'PUT',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ todo: {...todo, isCompleted: !todo.isCompleted}})
-    })
-
-    const {updatedTodo } = await response.json()
-    
-
-    console.log({ updatedTodo })
-    setTodo(updatedTodo)
-  }
-
-  const todoConfig = {
-    backgroundColor: todo.isCompleted ? COLORS.DONE : COLORS.TODO,
-    text: todo.isCompleted ? 'DONE' : 'TO DO'
-  }
-
-  return <li key={todo._id} className={styles.todoContainer}>
-    <div className={styles.todoTitle}>{todo.title}</div>
-    <div className={styles.todoCompleted}>{
-      <Button 
-        onClick={handleToggleTodo}
-        style={{backgroundColor: todoConfig.backgroundColor}}
-      >
-        {todoConfig.text}</Button>}
-      </div>
-    <div className={styles.todoRemoved}><Button>REMOVE</Button></div>
-  </li>
-}
-
-const useFetch = (url) => { //'api/todos'
-  const [data, setData] = useState(null)
-  const [error, setError] = useState(null)
-  const [isLoading, setIsLoading] = useState(true)
-
-  const getData = async () => {
-    try {
-      const response = await fetch(url);
-      const data = await response.json()
-      setData(data)
-    } catch (error) {
-      console.log({ error })
-      setError(error)
-    }
-    setIsLoading(false)
-  }
-
-  const reload = () => {
-    setIsLoading(true)
-    setTimeout(() => {
-      getData()
-    }, 3000);
-  }
+import { COLORS } from '../const'
+import Button from '/components/button'
+import Todo from '/components/todo'
+import useFetch from '/hooks/useFetch'
 
 
-  useEffect(() => {
-    setTimeout(() => {
-      getData()
-    }, 1000);
-  }, [])
-
-  return { data, error, isLoading, reload }
-}
 
 export default function Home() {
   const { data: todosData, error: todosError, isLoading: todosLoading, reload: reloadTodos } = useFetch('api/todos')
@@ -140,9 +63,8 @@ export default function Home() {
       <main className={styles.main}>
         <section className={styles.sectionTop}>
           <Button onClick={reloadTodos}>RELOAD DATA</Button>
-          <Button onClick={reloadTodos}>RELOAD DATA</Button>
         </section>
-        <section>
+        <section className={styles.sectionNewTodo}>
           <h3>Create new todo</h3>
           <form onSubmit={handleSubmit}>
             <label>
@@ -158,7 +80,7 @@ export default function Home() {
         </section>
 
         <section>
-          
+
         </section>
       </main>
 

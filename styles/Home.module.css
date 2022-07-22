@@ -8,54 +8,25 @@
   flex: 1;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
 }
 
 .ul {
   padding: 0;
   list-style-type: none;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
 }
 
 
-.todoContainer{
-  background-color: aliceblue;
-  display: grid;
-  grid-template-columns: 50% 25% 25%;
-  padding: 0.2rem;
-}
-
-.todoTitle {
-  grid-column: 1/2;
-}
-
-.todoCompleted {
-  grid-column: 2/3;
-
-}
-
-.todoRemoved {
-  grid-column: 3/4;
-
-}
-
-.button {
-  all: unset; 
-  cursor: pointer;
-  background-color: rgb(247, 214, 31);
-  border-radius: 0.2rem;
-  padding: 0.2rem;
-  font-size: 0.8rem;
-  font-weight:600
- }
-
- .button:focus {
-   outline: 1px solid #fff;
- }
-
- .sectionTop{
+.sectionTop {
   position: absolute;
   top: 1rem;
   display: flex;
   gap: 0.5rem;
- }
+}
+
+.sectionNewTodo {
+  margin: 6rem 0
+}

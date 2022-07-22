@@ -1,0 +1,21 @@
+.todoContainer {
+    background-color: aliceblue;
+    display: grid;
+    grid-template-columns: 50% 25% 25%;
+    padding: 0.2rem;
+    border: solid 3px black;
+}
+
+.todoTitle {
+    grid-column: 1/2;
+}
+
+.todoCompleted {
+    grid-column: 2/3;
+
+}
+
+.todoRemoved {
+    grid-column: 3/4;
+
+}
